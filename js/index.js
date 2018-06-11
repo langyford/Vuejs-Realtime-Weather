@@ -8,7 +8,10 @@ const app = new Vue({
         weather: [],
         url: "http://api.openweathermap.org/data/2.5/weather?lat=",
         appID: "&appid=60a59a9068bcbe5381c86ecb005d9adc",
-        currentLocation: ""
+        currentLocation: {
+            lat: 0,
+            lon: 0
+        }
     },
     mounted() {
 
