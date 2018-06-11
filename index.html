@@ -13,7 +13,7 @@
 
             <div class="row" id="appDiv">
 
-                <h3>{{ currentTime }}</h3>
+                <h3>{{ currentTime | time12Hour }}</h3>
 
                 <h3>Location: {{ location }}, {{ country }}</h3>
                 <p>Description: {{ description }}</p>
