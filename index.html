@@ -14,10 +14,13 @@
 
             <div class="row" id="appDiv">
 
+                <h3>{{ currentTime }}</h3>
+
                 <h3>Location: {{ location }}, {{ country }}</h3>
                 <p>Description: {{ description }}</p>
                 <p>Temp: {{ temperature | celcius }} C</p>
                 <p>Humidity: {{ humidity }}%</p>
+                <p>Cloud coverage: {{ cloudCoverage }}%</p>
 
             </div>
 

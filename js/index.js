@@ -5,12 +5,14 @@ const app = new Vue({
         weather: [],
         url: "http://api.openweathermap.org/data/2.5/weather?lat=",
         appID: "&appid=60a59a9068bcbe5381c86ecb005d9adc",
-        currentLocation: []
+        currentLocation: [],
+        currentTime: "00:00:00"
     },
     mounted() {
 
         this.getCurrentLocation();
         this.updateWeather();
+        this.showTime();
 
     },
     methods: {
@@ -25,6 +27,15 @@ const app = new Vue({
         },
         getCurrentLocation() {
             axios.get("http://ip-api.com/json/").then(response => {this.currentLocation = response.data});
+        },
+        showTime() {
+            // For the time now
+            Date.prototype.timeNow = function () {
+                 return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+            }
+            var newDate = new Date();
+            this.currentTime = newDate.timeNow();
+            setTimeout(this.showTime, 500);
         },
         hideLoader() {
             document.getElementById("loader").style.display = "none";
@@ -42,6 +53,14 @@ const app = new Vue({
             if (this.weather.length != 0)
                 return this.weather['main']['humidity'];
         },
+        cloudCoverage() {
+            if (this.weather.length != 0)
+                return this.weather['clouds']['all'];
+        },
+        description() {
+            if (this.weather.length != 0)
+                return this.weather['weather'][0]['main'];
+        },
         location() {
             if (this.weather.length != 0)
                 return this.weather['name'];
@@ -49,10 +68,6 @@ const app = new Vue({
         country() {
             if (this.weather.length != 0)
                 return this.weather['sys']["country"];
-        },
-        description() {
-            if (this.weather.length != 0)
-                return this.weather['weather'][0]['description'];
         }
 
     },
