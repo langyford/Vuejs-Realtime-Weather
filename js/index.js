@@ -8,10 +8,7 @@ const app = new Vue({
         weather: [],
         url: "http://api.openweathermap.org/data/2.5/weather?lat=",
         appID: "&appid=60a59a9068bcbe5381c86ecb005d9adc",
-        currentLocation: {
-            lat: 0,
-            lon: 0
-        }
+        currentLocation: []
     },
     mounted() {
 
@@ -22,11 +19,19 @@ const app = new Vue({
     methods: {
 
         updateWeather() {
-            axios.get(this.url + this.currentLocation["lat"] + "&lon=" + this.currentLocation["lon"] + this.appID).then(response => {this.weather = response.data});
-            setTimeout(this.updateWeather, 5000);
+            if (this.currentLocation.length != 0) {
+                axios.get(this.url + this.currentLocation["lat"] + "&lon=" + this.currentLocation["lon"] + this.appID).then(response => {
+                    this.weather = response.data;
+                });
+            }
+            setTimeout(this.updateWeather, 1000);
         },
         getCurrentLocation() {
             axios.get("http://ip-api.com/json/").then(response => {this.currentLocation = response.data});
+        },
+        hideLoader() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("appDiv").style.display = "block";
         }
 
     },
@@ -51,6 +56,13 @@ const app = new Vue({
         description() {
             if (this.weather.length != 0)
                 return this.weather['weather'][0]['description'];
+        }
+
+    },
+    watch: {
+
+        weather: function() {
+            this.hideLoader();
         }
 
     },
