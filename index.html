@@ -1,0 +1,38 @@
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h2>Vue.js Realtime Weather</h2>
+
+            <div class="row" id="appDiv">
+
+                <h3>Location: {{ location }}, {{ country }}</h3>
+                <p>Description: {{ description }}</p>
+                <p>Temp: {{ temperature | celcius }} C</p>
+                <p>Humidity: {{ humidity }}%</p>
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/index.js"></script>
+
+<script type="text/javascript">
+
+
+
+</script>
